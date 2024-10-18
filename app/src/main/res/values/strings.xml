@@ -8,6 +8,7 @@
     <!-- Registration -->
     <string name="registration_title">Herzlich willkommen</string>
     <string name="registration_description">Bitte fülle die nachfolgenden Felder aus, um dich zu registrieren:</string>
+    <string name="registration_submit">Registrieren</string>
 
     <!-- Confirmation -->
 </resources>

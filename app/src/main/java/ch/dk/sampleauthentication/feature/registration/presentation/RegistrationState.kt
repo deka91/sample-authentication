@@ -1,6 +1,7 @@
 package ch.dk.sampleauthentication.feature.registration.presentation
 
 import android.os.Parcelable
+import ch.dk.sampleauthentication.feature.registration.presentation.components.TextInputFieldState
 import kotlinx.parcelize.Parcelize
 
 /**
@@ -8,7 +9,9 @@ import kotlinx.parcelize.Parcelize
  */
 @Parcelize
 data class RegistrationState(
-    val name: String,
-    val email: String,
-    val birthday: String
+    val name: TextInputFieldState = TextInputFieldState(),
+    val email: TextInputFieldState = TextInputFieldState(),
+    val birthday: TextInputFieldState = TextInputFieldState(),
+    val isLoading: Boolean = false,
+    val isInputValid: Boolean = false,
 ) : Parcelable

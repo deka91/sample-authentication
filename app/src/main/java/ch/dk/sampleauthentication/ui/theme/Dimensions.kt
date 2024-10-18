@@ -18,7 +18,13 @@ data class Dimensions(
     val baseline3x5: Dp,
     val baseline4: Dp,
     val baseline4x5: Dp,
-    val baseline5: Dp
+    val baseline5: Dp,
+    val baseline5x5: Dp,
+    val baseline6: Dp,
+    val baseline6x5: Dp,
+    val baseline7: Dp,
+    val baseline7x5: Dp,
+    val baseline8: Dp
 )
 
 val DIMENSIONS = Dimensions(
@@ -33,5 +39,11 @@ val DIMENSIONS = Dimensions(
     baseline3x5 = 28.dp,
     baseline4 = 32.dp,
     baseline4x5 = 36.dp,
-    baseline5 = 40.dp
+    baseline5 = 40.dp,
+    baseline5x5 = 44.dp,
+    baseline6 = 48.dp,
+    baseline6x5 = 52.dp,
+    baseline7 = 56.dp,
+    baseline7x5 = 60.dp,
+    baseline8 = 64.dp
 )

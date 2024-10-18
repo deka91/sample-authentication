@@ -1,6 +1,9 @@
 package ch.dk.sampleauthentication.core.presentation.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -11,6 +14,7 @@ import ch.dk.sampleauthentication.core.presentation.navigation.AppRoutes.ROUTE_C
 import ch.dk.sampleauthentication.core.presentation.navigation.AppRoutes.ROUTE_REGISTRATION
 import ch.dk.sampleauthentication.feature.confirmation.presentation.ConfirmationScreen
 import ch.dk.sampleauthentication.feature.registration.presentation.RegistrationScreen
+import ch.dk.sampleauthentication.feature.registration.presentation.RegistrationViewModel
 
 /**
  * Created by Deniz Kalem on 18.10.2024
@@ -31,7 +35,9 @@ private fun NavGraphBuilder.authenticationGraph(navController: NavHostController
         route = GRAPH_AUTHENTICATION
     ) {
         composable(route = ROUTE_REGISTRATION) {
-            RegistrationScreen()
+            val registrationViewModel = hiltViewModel<RegistrationViewModel>()
+            val state by registrationViewModel.state.collectAsStateWithLifecycle()
+            RegistrationScreen(state, onEvent = {})
         }
 
         composable(route = ROUTE_CONFIRMATION) {
