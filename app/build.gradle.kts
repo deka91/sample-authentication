@@ -49,6 +49,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation)
+    implementation(libs.androidx.hilt.navigation)
 
     // Dependency Injection
     implementation(libs.hilt.android)
