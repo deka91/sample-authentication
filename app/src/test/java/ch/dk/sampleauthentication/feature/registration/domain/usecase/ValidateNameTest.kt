@@ -33,4 +33,18 @@ class ValidateNameTest {
         assertEquals((expected.error as UiText.LocalString).id, (actual.error as UiText.LocalString).id)
     }
 
+    @Test
+    fun `Empty name is not valid and returns error text for blank name`() {
+        // GIVEN
+        val name = ""
+
+        // ACTION
+        val actual = validateName.invoke(name)
+
+        // ASSERTION
+        val expected = ValidationResult(isSuccessful = false, error = UiText.LocalString(R.string.error_name_blank))
+        assertEquals(expected.isSuccessful, actual.isSuccessful)
+        assertEquals((expected.error as UiText.LocalString).id, (actual.error as UiText.LocalString).id)
+    }
+
 }
