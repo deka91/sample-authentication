@@ -16,7 +16,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import ch.dk.sampleauthentication.R
 import ch.dk.sampleauthentication.core.presentation.components.PrimaryButton
 import ch.dk.sampleauthentication.core.presentation.components.PrimaryHeader
@@ -92,7 +92,7 @@ private fun UserInfoItem(title: String, value: String) {
 }
 
 
-@Preview
+@PreviewLightDark
 @Composable
 private fun ConfirmationScreenPreview() {
     SampleAuthenticationTheme {
