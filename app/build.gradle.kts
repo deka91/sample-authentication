@@ -71,6 +71,7 @@ dependencies {
 
     // Unit Testing
     testImplementation(libs.junit)
+    testImplementation(libs.mockito)
 
     // UI Testing
     androidTestImplementation(platform(libs.androidx.compose.bom))

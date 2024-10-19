@@ -11,6 +11,7 @@ junitVersion = "1.2.1"
 kotlin = "2.0.20"
 ksp = "2.0.20-1.0.24"
 lifecycleRuntimeKtx = "2.8.6"
+mockito = "5.8.0"
 navigation = "2.8.3"
 security = "1.1.0-alpha06"
 timber = "5.0.1"
@@ -36,6 +37,7 @@ dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = 
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
+mockito = { module = "org.mockito:mockito-core", version.ref = "mockito" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 
 [plugins]
