@@ -13,8 +13,8 @@ import java.util.Locale
 class ValidateBirthday {
 
     private val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).apply { isLenient = false }
-    private val minDate = dateFormat.parse("01.01.1900")
-    private val maxDate = dateFormat.parse("31.12.2021")
+    private val minDate = dateFormat.parse(MIN_DATE)
+    private val maxDate = dateFormat.parse(MAX_DATE)
 
     operator fun invoke(birthday: String): ValidationResult {
         if (birthday.isBlank()) {
@@ -46,5 +46,10 @@ class ValidateBirthday {
         } else {
             ValidationResult(isSuccessful = true)
         }
+    }
+
+    companion object {
+        private const val MIN_DATE = "01.01.1900"
+        private const val MAX_DATE = "31.12.2021"
     }
 }
