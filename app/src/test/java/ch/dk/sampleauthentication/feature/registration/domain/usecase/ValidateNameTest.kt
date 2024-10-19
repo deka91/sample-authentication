@@ -47,4 +47,18 @@ class ValidateNameTest {
         assertEquals((expected.error as UiText.LocalString).id, (actual.error as UiText.LocalString).id)
     }
 
+    @Test
+    fun `Name with 1 character is valid and returns success and no error text`() {
+        // GIVEN
+        val name = "a"
+
+        // ACTION
+        val actual = validateName.invoke(name)
+
+        // ASSERTION
+        val expected = ValidationResult(isSuccessful = true, error = null)
+        assertEquals(expected.isSuccessful, actual.isSuccessful)
+        assertEquals(expected.error, expected.error)
+    }
+
 }
