@@ -88,4 +88,18 @@ class ValidateBirthdayTest {
         assertEquals(expected.isSuccessful, actual.isSuccessful)
         assertEquals((expected.error as UiText.LocalString).id, (actual.error as UiText.LocalString).id)
     }
+
+    @Test
+    fun `Valid birthday inside the valid range returns success and no error text`() {
+        // GIVEN
+        val name = "23.10.2004"
+
+        // ACTION
+        val actual = validateBirthday.invoke(name)
+
+        // ASSERTION
+        val expected = ValidationResult(isSuccessful = true, error = null)
+        assertEquals(expected.isSuccessful, actual.isSuccessful)
+        assertEquals(expected.error, expected.error)
+    }
 }
