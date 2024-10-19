@@ -32,4 +32,18 @@ class ValidateBirthdayTest {
         assertEquals(expected.isSuccessful, actual.isSuccessful)
         assertEquals((expected.error as UiText.LocalString).id, (actual.error as UiText.LocalString).id)
     }
+
+    @Test
+    fun `Empty birthday is not valid and returns error text for blank birthday`() {
+        // GIVEN
+        val name = ""
+
+        // ACTION
+        val actual = validateBirthday.invoke(name)
+
+        // ASSERTION
+        val expected = ValidationResult(isSuccessful = false, error = UiText.LocalString(R.string.error_birthday_blank))
+        assertEquals(expected.isSuccessful, actual.isSuccessful)
+        assertEquals((expected.error as UiText.LocalString).id, (actual.error as UiText.LocalString).id)
+    }
 }
