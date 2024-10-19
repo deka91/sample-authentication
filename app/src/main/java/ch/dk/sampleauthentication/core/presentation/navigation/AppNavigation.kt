@@ -37,7 +37,7 @@ private fun NavGraphBuilder.authenticationGraph(navController: NavHostController
         composable(route = ROUTE_REGISTRATION) {
             val registrationViewModel = hiltViewModel<RegistrationViewModel>()
             val state by registrationViewModel.state.collectAsStateWithLifecycle()
-            RegistrationScreen(state, onEvent = {})
+            RegistrationScreen(state, onEvent = { event -> registrationViewModel.onEvent(event) })
         }
 
         composable(route = ROUTE_CONFIRMATION) {
