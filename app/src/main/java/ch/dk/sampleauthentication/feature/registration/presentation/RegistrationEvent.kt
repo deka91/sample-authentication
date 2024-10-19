@@ -14,4 +14,5 @@ sealed class RegistrationEvent {
     data class OnBirthdayFocusChange(val focusState: FocusState) : RegistrationEvent()
     data object OnErrorMessageSeen : RegistrationEvent()
     data object OnSubmit : RegistrationEvent()
+    data object OnSuccess : RegistrationEvent()
 }

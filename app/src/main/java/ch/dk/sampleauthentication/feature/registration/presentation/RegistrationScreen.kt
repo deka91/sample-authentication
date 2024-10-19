@@ -36,6 +36,7 @@ fun RegistrationScreen(state: RegistrationState, onEvent: (RegistrationEvent) ->
     val keyboard = LocalSoftwareKeyboardController.current
     val context = LocalContext.current
 
+    if (state.isInputValid) onEvent(RegistrationEvent.OnSuccess)
     LaunchedEffect(key1 = state.errorMessage, key2 = errorSnackBarHostState) {
         state.errorMessage?.let { message ->
             keyboard?.hide()
@@ -100,6 +101,7 @@ private fun RegistrationContent(state: RegistrationState, onEvent: (Registration
         TextInputField(
             state = state.name,
             hint = stringResource(R.string.title_name),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
             onValueChange = { onEvent(RegistrationEvent.OnNameChange(it)) },
             onFocusChanged = { onEvent(RegistrationEvent.OnNameFocusChange(it)) }
         )
@@ -107,6 +109,7 @@ private fun RegistrationContent(state: RegistrationState, onEvent: (Registration
         TextInputField(
             state = state.email,
             hint = stringResource(R.string.title_email),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
             onValueChange = { onEvent(RegistrationEvent.OnEmailChange(it)) },
             onFocusChanged = { onEvent(RegistrationEvent.OnEmailFocusChange(it)) }
         )

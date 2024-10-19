@@ -12,7 +12,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.focus.onFocusChanged
-import androidx.compose.ui.text.input.KeyboardType
 import ch.dk.sampleauthentication.ui.theme.DIMENSIONS
 import ch.dk.sampleauthentication.ui.theme.Gray
 import ch.dk.sampleauthentication.ui.theme.Green
@@ -25,7 +24,7 @@ fun TextInputField(
     modifier: Modifier = Modifier,
     state: TextInputFieldState,
     hint: String,
-    keyboardOptions: KeyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+    keyboardOptions: KeyboardOptions,
     onValueChange: (String) -> Unit,
     onFocusChanged: (FocusState) -> Unit
 ) {

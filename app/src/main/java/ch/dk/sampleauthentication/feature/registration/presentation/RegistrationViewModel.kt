@@ -29,6 +29,7 @@ class RegistrationViewModel @Inject constructor(
             is RegistrationEvent.OnBirthdayFocusChange -> changeBirthdayFocus(event.focusState)
             is RegistrationEvent.OnErrorMessageSeen -> errorMessageSeen()
             is RegistrationEvent.OnSubmit -> register()
+            else -> Unit
         }
     }
 
