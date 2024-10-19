@@ -20,6 +20,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import ch.dk.sampleauthentication.R
 import ch.dk.sampleauthentication.core.presentation.components.PrimaryButton
+import ch.dk.sampleauthentication.core.presentation.components.PrimaryHeader
 import ch.dk.sampleauthentication.feature.registration.presentation.components.TextInputField
 import ch.dk.sampleauthentication.ui.theme.DIMENSIONS
 import ch.dk.sampleauthentication.ui.theme.SampleAuthenticationTheme
@@ -53,7 +54,7 @@ fun RegistrationScreen(state: RegistrationState, onEvent: (RegistrationEvent) ->
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
             ) {
-                RegistrationHeader()
+                PrimaryHeader(text = stringResource(id = R.string.registration_title))
                 RegistrationContent(state = state, onEvent = onEvent)
             }
         }, snackbarHost = {
@@ -65,17 +66,6 @@ fun RegistrationScreen(state: RegistrationState, onEvent: (RegistrationEvent) ->
                 )
             }
         })
-}
-
-@Composable
-private fun RegistrationHeader() {
-    Spacer(modifier = Modifier.height(DIMENSIONS.baseline5))
-    Text(
-        text = stringResource(id = R.string.registration_title),
-        color = MaterialTheme.colorScheme.onPrimaryContainer,
-        style = MaterialTheme.typography.titleLarge
-    )
-    Spacer(modifier = Modifier.height(DIMENSIONS.baseline5))
 }
 
 @Composable
