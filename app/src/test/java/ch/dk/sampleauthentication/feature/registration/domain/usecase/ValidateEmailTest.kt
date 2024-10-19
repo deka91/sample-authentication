@@ -36,4 +36,18 @@ class ValidateEmailTest {
         assertEquals(expected.isSuccessful, actual.isSuccessful)
         assertEquals((expected.error as UiText.LocalString).id, (actual.error as UiText.LocalString).id)
     }
+
+    @Test
+    fun `Empty email is not valid and returns error text for blank email`() {
+        // GIVEN
+        val name = ""
+
+        // ACTION
+        val actual = validateEmail.invoke(name)
+
+        // ASSERTION
+        val expected = ValidationResult(isSuccessful = false, error = UiText.LocalString(R.string.error_email_blank))
+        assertEquals(expected.isSuccessful, actual.isSuccessful)
+        assertEquals((expected.error as UiText.LocalString).id, (actual.error as UiText.LocalString).id)
+    }
 }
