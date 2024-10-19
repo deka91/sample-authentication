@@ -65,26 +65,9 @@ private fun ConfirmationContent(state: ConfirmationState) {
             style = MaterialTheme.typography.bodyLarge
         )
 
-        Text(
-            text = stringResource(id = R.string.title_name) + ": " + state.name,
-            color = MaterialTheme.colorScheme.onSurface,
-            style = MaterialTheme.typography.bodyLarge,
-            fontWeight = FontWeight.Bold
-        )
-
-        Text(
-            text = stringResource(id = R.string.title_email) + ": " + state.email,
-            color = MaterialTheme.colorScheme.onSurface,
-            style = MaterialTheme.typography.bodyLarge,
-            fontWeight = FontWeight.Bold
-        )
-
-        Text(
-            text = stringResource(id = R.string.title_birthday) + ": " + state.birthday,
-            color = MaterialTheme.colorScheme.onSurface,
-            style = MaterialTheme.typography.bodyLarge,
-            fontWeight = FontWeight.Bold
-        )
+        UserInfoItem(title = stringResource(R.string.title_name), value = state.name)
+        UserInfoItem(title = stringResource(R.string.title_email), value = state.email)
+        UserInfoItem(title = stringResource(R.string.title_birthday), value = state.birthday)
 
         Spacer(modifier = Modifier.weight(1f))
 
@@ -97,6 +80,17 @@ private fun ConfirmationContent(state: ConfirmationState) {
         Spacer(modifier = Modifier.height(DIMENSIONS.baseline4))
     }
 }
+
+@Composable
+private fun UserInfoItem(title: String, value: String) {
+    Text(
+        text = "$title: $value",
+        color = MaterialTheme.colorScheme.onSurface,
+        style = MaterialTheme.typography.bodyLarge,
+        fontWeight = FontWeight.Bold
+    )
+}
+
 
 @Preview
 @Composable
