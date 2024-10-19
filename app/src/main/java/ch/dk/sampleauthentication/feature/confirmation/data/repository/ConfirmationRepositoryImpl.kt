@@ -1,4 +1,4 @@
-package ch.dk.sampleauthentication.feature.confirmation.data.confirmation
+package ch.dk.sampleauthentication.feature.confirmation.data.repository
 
 import ch.dk.sampleauthentication.core.data.preferences.PreferenceManager
 import ch.dk.sampleauthentication.feature.confirmation.domain.repository.ConfirmationRepository
