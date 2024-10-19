@@ -1,10 +1,8 @@
 package ch.dk.sampleauthentication.feature.confirmation.presentation
 
+import android.app.Activity
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -15,10 +13,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import ch.dk.sampleauthentication.R
+import ch.dk.sampleauthentication.core.presentation.components.PrimaryButton
 import ch.dk.sampleauthentication.core.presentation.components.PrimaryHeader
 import ch.dk.sampleauthentication.ui.theme.DIMENSIONS
 import ch.dk.sampleauthentication.ui.theme.SampleAuthenticationTheme
@@ -27,7 +27,7 @@ import ch.dk.sampleauthentication.ui.theme.SampleAuthenticationTheme
  * Created by Deniz Kalem on 18.10.2024
  */
 @Composable
-fun ConfirmationScreen(state: ConfirmationState, onEvent: (ConfirmationEvent) -> Unit) {
+fun ConfirmationScreen(state: ConfirmationState) {
 
     Scaffold(
         content = { padding ->
@@ -40,13 +40,15 @@ fun ConfirmationScreen(state: ConfirmationState, onEvent: (ConfirmationEvent) ->
                 verticalArrangement = Arrangement.Center,
             ) {
                 PrimaryHeader(text = stringResource(id = R.string.confirmation_title))
-                ConfirmationContent(state = state, onEvent = onEvent)
+                ConfirmationContent(state = state)
             }
         })
 }
 
 @Composable
-private fun ConfirmationContent(state: ConfirmationState, onEvent: (ConfirmationEvent) -> Unit) {
+private fun ConfirmationContent(state: ConfirmationState) {
+    val activity = (LocalContext.current as? Activity)
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -84,6 +86,15 @@ private fun ConfirmationContent(state: ConfirmationState, onEvent: (Confirmation
             fontWeight = FontWeight.Bold
         )
 
+        Spacer(modifier = Modifier.weight(1f))
+
+        PrimaryButton(
+            modifier = Modifier.fillMaxWidth(),
+            text = stringResource(R.string.confirmation_finish),
+            onClick = { activity?.finish() }
+        )
+
+        Spacer(modifier = Modifier.height(DIMENSIONS.baseline4))
     }
 }
 
@@ -91,6 +102,6 @@ private fun ConfirmationContent(state: ConfirmationState, onEvent: (Confirmation
 @Composable
 fun ConfirmationScreenPreview() {
     SampleAuthenticationTheme {
-        ConfirmationScreen(state = ConfirmationState(), onEvent = {})
+        ConfirmationScreen(state = ConfirmationState())
     }
 }

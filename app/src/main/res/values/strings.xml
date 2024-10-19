@@ -13,6 +13,7 @@
     <!-- Confirmation -->
     <string name="confirmation_title">Danke für die Registrierung</string>
     <string name="confirmation_description">Du hast dich erfolgreich mit den folgenden Daten registriert:</string>
+    <string name="confirmation_finish">App schliessen</string>
 
     <!-- Error -->
     <string name="error_name_blank">Der Name darf nicht leer sein</string>

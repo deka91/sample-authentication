@@ -50,7 +50,7 @@ private fun NavGraphBuilder.authenticationGraph(navController: NavHostController
         composable(route = ROUTE_CONFIRMATION) {
             val confirmationViewModel = hiltViewModel<ConfirmationViewModel>()
             val state by confirmationViewModel.state.collectAsStateWithLifecycle()
-            ConfirmationScreen(state = state, onEvent = { confirmationViewModel.onEvent(it) })
+            ConfirmationScreen(state = state)
         }
     }
 }

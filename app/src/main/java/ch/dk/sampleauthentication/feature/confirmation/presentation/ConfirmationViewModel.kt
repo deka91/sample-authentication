@@ -20,18 +20,16 @@ class ConfirmationViewModel @Inject constructor(
     )
 
     init {
+        loadUserData()
+    }
+
+    private fun loadUserData() {
         updateState {
             it.copy(
                 name = confirmationRepository.loadName(),
                 email = confirmationRepository.loadEmail(),
                 birthday = confirmationRepository.loadBirthday()
             )
-        }
-    }
-
-    fun onEvent(event: ConfirmationEvent) {
-        when (event) {
-            ConfirmationEvent.OnFinish -> {}
         }
     }
 
