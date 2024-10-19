@@ -13,8 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.focus.onFocusChanged
 import ch.dk.sampleauthentication.ui.theme.DIMENSIONS
-import ch.dk.sampleauthentication.ui.theme.Gray
-import ch.dk.sampleauthentication.ui.theme.Green
 
 /**
  * Created by Deniz Kalem on 18.10.2024
@@ -39,11 +37,6 @@ fun TextInputField(
             singleLine = true,
             maxLines = 1,
             shape = MaterialTheme.shapes.small,
-            colors = TextFieldDefaults.colors(
-                focusedContainerColor = MaterialTheme.colorScheme.outline,
-                unfocusedContainerColor = MaterialTheme.colorScheme.outline,
-                disabledContainerColor = MaterialTheme.colorScheme.outline,
-            ),
             keyboardOptions = keyboardOptions
         )
 
@@ -53,7 +46,7 @@ fun TextInputField(
                     .align(Alignment.CenterStart)
                     .padding(DIMENSIONS.baseline2),
                 text = hint,
-                color = Gray
+                color = MaterialTheme.colorScheme.outline
             )
         }
 
@@ -63,7 +56,7 @@ fun TextInputField(
                     .align(Alignment.CenterEnd)
                     .padding(DIMENSIONS.baseline2),
                 imageVector = Icons.Default.Check,
-                tint = Green,
+                tint = MaterialTheme.colorScheme.primary,
                 contentDescription = null,
             )
         }

@@ -22,9 +22,7 @@ import ch.dk.sampleauthentication.R
 import ch.dk.sampleauthentication.core.presentation.components.PrimaryButton
 import ch.dk.sampleauthentication.feature.registration.presentation.components.TextInputField
 import ch.dk.sampleauthentication.ui.theme.DIMENSIONS
-import ch.dk.sampleauthentication.ui.theme.Red
 import ch.dk.sampleauthentication.ui.theme.SampleAuthenticationTheme
-import ch.dk.sampleauthentication.ui.theme.White
 
 /**
  * Created by Deniz Kalem on 18.10.2024
@@ -51,7 +49,7 @@ fun RegistrationScreen(state: RegistrationState, onEvent: (RegistrationEvent) ->
                 modifier = Modifier
                     .padding(padding)
                     .fillMaxSize()
-                    .background(MaterialTheme.colorScheme.onSurface),
+                    .background(MaterialTheme.colorScheme.primaryContainer),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
             ) {
@@ -61,8 +59,8 @@ fun RegistrationScreen(state: RegistrationState, onEvent: (RegistrationEvent) ->
         }, snackbarHost = {
             SnackbarHost(hostState = errorSnackBarHostState) { data ->
                 Snackbar(
-                    containerColor = Red,
-                    contentColor = White,
+                    containerColor = MaterialTheme.colorScheme.errorContainer,
+                    contentColor = MaterialTheme.colorScheme.onErrorContainer,
                     snackbarData = data
                 )
             }
@@ -86,7 +84,7 @@ private fun RegistrationContent(state: RegistrationState, onEvent: (Registration
         modifier = Modifier
             .fillMaxSize()
             .clip(RoundedCornerShape(topStart = DIMENSIONS.baseline2, topEnd = DIMENSIONS.baseline2))
-            .background(MaterialTheme.colorScheme.onPrimaryContainer)
+            .background(MaterialTheme.colorScheme.background)
             .padding(DIMENSIONS.baseline2)
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(DIMENSIONS.baseline2)
