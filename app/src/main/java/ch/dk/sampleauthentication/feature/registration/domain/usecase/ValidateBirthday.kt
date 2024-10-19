@@ -12,7 +12,7 @@ import java.util.Locale
  */
 class ValidateBirthday {
 
-    private val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+    private val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).apply { isLenient = false }
     private val minDate = dateFormat.parse("01.01.1900")
     private val maxDate = dateFormat.parse("31.12.2021")
 
