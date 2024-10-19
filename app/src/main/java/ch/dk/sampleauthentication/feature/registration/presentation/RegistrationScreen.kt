@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -88,6 +89,7 @@ private fun RegistrationContent(state: RegistrationState, onEvent: (Registration
         )
 
         TextInputField(
+            modifier = Modifier.testTag(RegistrationTestTag.INPUT_NAME),
             state = state.name,
             hint = stringResource(R.string.title_name),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
@@ -96,6 +98,7 @@ private fun RegistrationContent(state: RegistrationState, onEvent: (Registration
         )
 
         TextInputField(
+            modifier = Modifier.testTag(RegistrationTestTag.INPUT_EMAIL),
             state = state.email,
             hint = stringResource(R.string.title_email),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
@@ -104,6 +107,7 @@ private fun RegistrationContent(state: RegistrationState, onEvent: (Registration
         )
 
         TextInputField(
+            modifier = Modifier.testTag(RegistrationTestTag.INPUT_BIRTHDAY),
             state = state.birthday,
             hint = stringResource(R.string.title_birthday),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
@@ -115,7 +119,7 @@ private fun RegistrationContent(state: RegistrationState, onEvent: (Registration
         Spacer(modifier = Modifier.weight(1f))
 
         PrimaryButton(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().testTag(RegistrationTestTag.BUTTON_SUBMIT),
             text = stringResource(R.string.registration_submit),
             onClick = {
                 onEvent(

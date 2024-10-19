@@ -30,9 +30,9 @@ fun TextInputField(
     onValueChange: (String) -> Unit,
     onFocusChanged: (FocusState) -> Unit
 ) {
-    Box(modifier = modifier) {
+    Box {
         OutlinedTextField(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxWidth()
                 .align(Alignment.CenterStart)
                 .onFocusChanged { onFocusChanged(it) },
