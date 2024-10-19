@@ -21,17 +21,11 @@ class PreferenceManager @Inject constructor(
         Timber.i("User data saved successfully: Name: $name, Email: $email, Birthday: $birthday")
     }
 
-    fun readName(): String? {
-        return sharedPreferences.getString(KEY_NAME, null)
-    }
+    fun readName(): String? = sharedPreferences.getString(KEY_NAME, null)
 
-    fun readEmail(): String? {
-        return sharedPreferences.getString(KEY_EMAIL, null)
-    }
+    fun readEmail(): String? = sharedPreferences.getString(KEY_EMAIL, null)
 
-    fun readBirthday(): String? {
-        return sharedPreferences.getString(KEY_BIRTHDAY, null)
-    }
+    fun readBirthday(): String? = sharedPreferences.getString(KEY_BIRTHDAY, null)
 
     companion object {
         private const val KEY_NAME = "name"
