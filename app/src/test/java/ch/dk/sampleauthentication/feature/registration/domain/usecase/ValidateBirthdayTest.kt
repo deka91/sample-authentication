@@ -62,9 +62,23 @@ class ValidateBirthdayTest {
     }
 
     @Test
-    fun `Birthday outside the valid range is not valid and returns error text for invalid birthday`() {
+    fun `Birthday before the minimum date is not valid and returns error text for invalid birthday`() {
         // GIVEN
         val name = "31.12.1899"
+
+        // ACTION
+        val actual = validateBirthday.invoke(name)
+
+        // ASSERTION
+        val expected = ValidationResult(isSuccessful = false, error = UiText.LocalString(R.string.error_birthday_not_valid))
+        assertEquals(expected.isSuccessful, actual.isSuccessful)
+        assertEquals((expected.error as UiText.LocalString).id, (actual.error as UiText.LocalString).id)
+    }
+
+    @Test
+    fun `Birthday after the maximum date is not valid and returns error text for invalid birthday`() {
+        // GIVEN
+        val name = "01.01.2022"
 
         // ACTION
         val actual = validateBirthday.invoke(name)
