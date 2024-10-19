@@ -21,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import ch.dk.sampleauthentication.R
 import ch.dk.sampleauthentication.core.presentation.components.PrimaryButton
 import ch.dk.sampleauthentication.core.presentation.components.PrimaryHeader
+import ch.dk.sampleauthentication.feature.registration.presentation.InputConstants.DATE_MAX_LENGTH
 import ch.dk.sampleauthentication.feature.registration.presentation.components.TextInputField
 import ch.dk.sampleauthentication.ui.theme.DIMENSIONS
 import ch.dk.sampleauthentication.ui.theme.SampleAuthenticationTheme
@@ -106,6 +107,7 @@ private fun RegistrationContent(state: RegistrationState, onEvent: (Registration
             state = state.birthday,
             hint = stringResource(R.string.title_birthday),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            maxLength = DATE_MAX_LENGTH,
             onValueChange = { onEvent(RegistrationEvent.OnBirthdayChange(it)) },
             onFocusChanged = { onEvent(RegistrationEvent.OnBirthdayFocusChange(it)) }
         )
@@ -136,4 +138,8 @@ fun RegistrationScreenPreview() {
     SampleAuthenticationTheme {
         RegistrationScreen(state = RegistrationState(), onEvent = {})
     }
+}
+
+object InputConstants {
+    const val DATE_MAX_LENGTH = 8
 }

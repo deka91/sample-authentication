@@ -6,7 +6,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material3.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,6 +26,7 @@ fun TextInputField(
     state: TextInputFieldState,
     hint: String,
     keyboardOptions: KeyboardOptions,
+    maxLength: Int? = null,
     onValueChange: (String) -> Unit,
     onFocusChanged: (FocusState) -> Unit
 ) {
@@ -33,7 +37,11 @@ fun TextInputField(
                 .align(Alignment.CenterStart)
                 .onFocusChanged { onFocusChanged(it) },
             value = state.text,
-            onValueChange = onValueChange,
+            onValueChange = { input ->
+                if (maxLength == null || input.length <= maxLength) {
+                    onValueChange(input)
+                }
+            },
             singleLine = true,
             maxLines = 1,
             shape = MaterialTheme.shapes.small,
