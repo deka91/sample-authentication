@@ -56,6 +56,9 @@ dependencies {
     ksp(libs.hilt.compiler)
     ksp(libs.dagger.compiler)
 
+    // Persistence
+    implementation(libs.androidx.security)
+
     // UI Components & Design
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
