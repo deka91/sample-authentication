@@ -25,7 +25,7 @@ class ValidateNameTest {
         val name = "  "
 
         // ACTION
-        val actual = validateName.invoke(name)
+        val actual = validateName(name)
 
         // ASSERTION
         val expected = ValidationResult(isSuccessful = false, error = UiText.LocalString(R.string.error_name_blank))
@@ -39,7 +39,7 @@ class ValidateNameTest {
         val name = ""
 
         // ACTION
-        val actual = validateName.invoke(name)
+        val actual = validateName(name)
 
         // ASSERTION
         val expected = ValidationResult(isSuccessful = false, error = UiText.LocalString(R.string.error_name_blank))
@@ -53,7 +53,7 @@ class ValidateNameTest {
         val name = "a"
 
         // ACTION
-        val actual = validateName.invoke(name)
+        val actual = validateName(name)
 
         // ASSERTION
         val expected = ValidationResult(isSuccessful = true, error = null)
@@ -67,7 +67,7 @@ class ValidateNameTest {
         val name = "abcd"
 
         // ACTION
-        val actual = validateName.invoke(name)
+        val actual = validateName(name)
 
         // ASSERTION
         val expected = ValidationResult(isSuccessful = true, error = null)

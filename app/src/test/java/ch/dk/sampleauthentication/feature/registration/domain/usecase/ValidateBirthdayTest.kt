@@ -25,7 +25,7 @@ class ValidateBirthdayTest {
         val name = "  "
 
         // ACTION
-        val actual = validateBirthday.invoke(name)
+        val actual = validateBirthday(name)
 
         // ASSERTION
         val expected = ValidationResult(isSuccessful = false, error = UiText.LocalString(R.string.error_birthday_blank))
@@ -39,7 +39,7 @@ class ValidateBirthdayTest {
         val name = ""
 
         // ACTION
-        val actual = validateBirthday.invoke(name)
+        val actual = validateBirthday(name)
 
         // ASSERTION
         val expected = ValidationResult(isSuccessful = false, error = UiText.LocalString(R.string.error_birthday_blank))
@@ -53,7 +53,7 @@ class ValidateBirthdayTest {
         val name = "1.1.99"
 
         // ACTION
-        val actual = validateBirthday.invoke(name)
+        val actual = validateBirthday(name)
 
         // ASSERTION
         val expected = ValidationResult(isSuccessful = false, error = UiText.LocalString(R.string.error_birthday_not_valid))
@@ -67,7 +67,7 @@ class ValidateBirthdayTest {
         val name = "31.12.1899"
 
         // ACTION
-        val actual = validateBirthday.invoke(name)
+        val actual = validateBirthday(name)
 
         // ASSERTION
         val expected = ValidationResult(isSuccessful = false, error = UiText.LocalString(R.string.error_birthday_not_valid))
@@ -81,7 +81,7 @@ class ValidateBirthdayTest {
         val name = "01.01.2022"
 
         // ACTION
-        val actual = validateBirthday.invoke(name)
+        val actual = validateBirthday(name)
 
         // ASSERTION
         val expected = ValidationResult(isSuccessful = false, error = UiText.LocalString(R.string.error_birthday_not_valid))
@@ -95,7 +95,7 @@ class ValidateBirthdayTest {
         val name = "23.10.2004"
 
         // ACTION
-        val actual = validateBirthday.invoke(name)
+        val actual = validateBirthday(name)
 
         // ASSERTION
         val expected = ValidationResult(isSuccessful = true, error = null)

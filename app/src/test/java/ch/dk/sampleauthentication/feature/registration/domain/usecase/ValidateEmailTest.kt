@@ -29,7 +29,7 @@ class ValidateEmailTest {
         val name = "  "
 
         // ACTION
-        val actual = validateEmail.invoke(name)
+        val actual = validateEmail(name)
 
         // ASSERTION
         val expected = ValidationResult(isSuccessful = false, error = UiText.LocalString(R.string.error_email_blank))
@@ -43,7 +43,7 @@ class ValidateEmailTest {
         val name = ""
 
         // ACTION
-        val actual = validateEmail.invoke(name)
+        val actual = validateEmail(name)
 
         // ASSERTION
         val expected = ValidationResult(isSuccessful = false, error = UiText.LocalString(R.string.error_email_blank))
@@ -57,7 +57,7 @@ class ValidateEmailTest {
         val name = "abcde.ch"
 
         // ACTION
-        val actual = validateEmail.invoke(name)
+        val actual = validateEmail(name)
 
         // ASSERTION
         val expected = ValidationResult(isSuccessful = false, error = UiText.LocalString(R.string.error_email_not_valid))
@@ -71,7 +71,7 @@ class ValidateEmailTest {
         val name = "abcde@ch"
 
         // ACTION
-        val actual = validateEmail.invoke(name)
+        val actual = validateEmail(name)
 
         // ASSERTION
         val expected = ValidationResult(isSuccessful = false, error = UiText.LocalString(R.string.error_email_not_valid))
@@ -85,7 +85,7 @@ class ValidateEmailTest {
         val name = "a@b.ch"
 
         // ACTION
-        val actual = validateEmail.invoke(name)
+        val actual = validateEmail(name)
 
         // ASSERTION
         val expected = ValidationResult(isSuccessful = false, error = null)
