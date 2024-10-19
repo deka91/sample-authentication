@@ -46,4 +46,18 @@ class ValidateBirthdayTest {
         assertEquals(expected.isSuccessful, actual.isSuccessful)
         assertEquals((expected.error as UiText.LocalString).id, (actual.error as UiText.LocalString).id)
     }
+
+    @Test
+    fun `Birthday with wrong format is not valid and returns error text for invalid birthday`() {
+        // GIVEN
+        val name = "1.1.99"
+
+        // ACTION
+        val actual = validateBirthday.invoke(name)
+
+        // ASSERTION
+        val expected = ValidationResult(isSuccessful = false, error = UiText.LocalString(R.string.error_birthday_not_valid))
+        assertEquals(expected.isSuccessful, actual.isSuccessful)
+        assertEquals((expected.error as UiText.LocalString).id, (actual.error as UiText.LocalString).id)
+    }
 }
