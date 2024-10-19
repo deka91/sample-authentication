@@ -141,5 +141,5 @@ fun RegistrationScreenPreview() {
 }
 
 object InputConstants {
-    const val DATE_MAX_LENGTH = 8
+    const val DATE_MAX_LENGTH = 10
 }
