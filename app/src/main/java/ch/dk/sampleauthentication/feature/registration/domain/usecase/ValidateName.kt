@@ -6,10 +6,6 @@ import ch.dk.sampleauthentication.feature.registration.domain.validation.Validat
 
 class ValidateName {
 
-    companion object {
-        const val MIN_NAME_LENGTH = 1
-    }
-
     operator fun invoke(name: String): ValidationResult {
         if (name.isBlank()) {
             return ValidationResult(
@@ -22,5 +18,9 @@ class ValidateName {
         }
 
         return ValidationResult(isSuccessful = false, error = UiText.LocalString(R.string.error_name_not_valid))
+    }
+
+    companion object {
+        private const val MIN_NAME_LENGTH = 1
     }
 }
