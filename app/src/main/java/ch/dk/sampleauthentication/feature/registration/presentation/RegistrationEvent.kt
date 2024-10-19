@@ -8,11 +8,11 @@ import androidx.compose.ui.focus.FocusState
 sealed class RegistrationEvent {
     data class OnNameChange(val name: String) : RegistrationEvent()
     data class OnNameFocusChange(val focusState: FocusState) : RegistrationEvent()
-    data class OnEmailChange(val emailAddress: String) : RegistrationEvent()
+    data class OnEmailChange(val email: String) : RegistrationEvent()
     data class OnEmailFocusChange(val focusState: FocusState) : RegistrationEvent()
     data class OnBirthdayChange(val birthday: String) : RegistrationEvent()
     data class OnBirthdayFocusChange(val focusState: FocusState) : RegistrationEvent()
     data object OnErrorMessageSeen : RegistrationEvent()
-    data object OnSubmit : RegistrationEvent()
+    data class OnSubmit(val name: String, val email: String, val birthday: String) : RegistrationEvent()
     data object OnSuccess : RegistrationEvent()
 }

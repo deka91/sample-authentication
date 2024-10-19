@@ -3,6 +3,7 @@ package ch.dk.sampleauthentication.feature.registration.presentation
 import androidx.compose.ui.focus.FocusState
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import ch.dk.sampleauthentication.feature.registration.domain.repository.RegistrationRepository
 import ch.dk.sampleauthentication.feature.registration.domain.usecase.RegistrationUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -12,7 +13,9 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class RegistrationViewModel @Inject constructor(
-    private val savedStateHandle: SavedStateHandle, private val registrationUseCases: RegistrationUseCases
+    private val savedStateHandle: SavedStateHandle,
+    private val registrationUseCases: RegistrationUseCases,
+    private val registrationRepository: RegistrationRepository
 ) : ViewModel() {
 
     val state = savedStateHandle.getStateFlow(
@@ -21,14 +24,14 @@ class RegistrationViewModel @Inject constructor(
 
     fun onEvent(event: RegistrationEvent) {
         when (event) {
-            is RegistrationEvent.OnNameChange -> changeName(event.name)
-            is RegistrationEvent.OnNameFocusChange -> changeNameFocus(event.focusState)
-            is RegistrationEvent.OnEmailChange -> changeEmail(event.emailAddress)
-            is RegistrationEvent.OnEmailFocusChange -> changeEmailFocus(event.focusState)
-            is RegistrationEvent.OnBirthdayChange -> changeBirthday(event.birthday)
-            is RegistrationEvent.OnBirthdayFocusChange -> changeBirthdayFocus(event.focusState)
+            is RegistrationEvent.OnNameChange -> changeName(name = event.name)
+            is RegistrationEvent.OnNameFocusChange -> changeNameFocus(focusState = event.focusState)
+            is RegistrationEvent.OnEmailChange -> changeEmail(email = event.email)
+            is RegistrationEvent.OnEmailFocusChange -> changeEmailFocus(focusState = event.focusState)
+            is RegistrationEvent.OnBirthdayChange -> changeBirthday(birthday = event.birthday)
+            is RegistrationEvent.OnBirthdayFocusChange -> changeBirthdayFocus(focusState = event.focusState)
             is RegistrationEvent.OnErrorMessageSeen -> errorMessageSeen()
-            is RegistrationEvent.OnSubmit -> register()
+            is RegistrationEvent.OnSubmit -> register(name = event.name, email = event.email, birthday = event.birthday)
             else -> Unit
         }
     }
@@ -46,10 +49,10 @@ class RegistrationViewModel @Inject constructor(
         }
     }
 
-    private fun changeEmail(emailAddress: String) {
-        val result = registrationUseCases.validateEmail(emailAddress)
+    private fun changeEmail(email: String) {
+        val result = registrationUseCases.validateEmail(email)
         updateState {
-            it.copy(email = it.email.copy(text = emailAddress, isCheckVisible = result.isSuccessful))
+            it.copy(email = it.email.copy(text = email, isCheckVisible = result.isSuccessful))
         }
     }
 
@@ -84,25 +87,26 @@ class RegistrationViewModel @Inject constructor(
         updateState { it.copy(errorMessage = null) }
     }
 
-    private fun register() {
-        val nameResult = registrationUseCases.validateName(state.value.name.text)
+    private fun register(name: String, email: String, birthday: String) {
+        val nameResult = registrationUseCases.validateName(name)
         if (!nameResult.isSuccessful) {
             updateState { it.copy(errorMessage = nameResult.error) }
             return
         }
 
-        val emailResult = registrationUseCases.validateEmail(state.value.email.text)
+        val emailResult = registrationUseCases.validateEmail(email)
         if (!emailResult.isSuccessful) {
             updateState { it.copy(errorMessage = emailResult.error) }
             return
         }
 
-        val birthdayResult = registrationUseCases.validateBirthday(state.value.birthday.text)
+        val birthdayResult = registrationUseCases.validateBirthday(birthday)
         if (!birthdayResult.isSuccessful) {
             updateState { it.copy(errorMessage = birthdayResult.error) }
             return
         }
 
+        registrationRepository.saveUserData(name = name, email = email, birthday = birthday)
         updateState { it.copy(isInputValid = true) }
     }
 

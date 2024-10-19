@@ -125,7 +125,15 @@ private fun RegistrationContent(state: RegistrationState, onEvent: (Registration
         PrimaryButton(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(R.string.registration_submit),
-            onClick = { onEvent(RegistrationEvent.OnSubmit) }
+            onClick = {
+                onEvent(
+                    RegistrationEvent.OnSubmit(
+                        name = state.name.text,
+                        email = state.email.text,
+                        birthday = state.birthday.text
+                    )
+                )
+            }
         )
 
         Spacer(modifier = Modifier.height(DIMENSIONS.baseline4))
