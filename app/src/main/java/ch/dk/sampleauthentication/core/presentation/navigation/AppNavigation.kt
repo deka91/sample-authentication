@@ -41,7 +41,12 @@ private fun NavGraphBuilder.authenticationGraph(navController: NavHostController
             val state by registrationViewModel.state.collectAsStateWithLifecycle()
             RegistrationScreen(state, onEvent = { event ->
                 when (event) {
-                    is RegistrationEvent.OnSuccess -> navController.navigate(ROUTE_CONFIRMATION)
+                    is RegistrationEvent.OnSuccess -> {
+                        navController.navigate(ROUTE_CONFIRMATION) {
+                            popUpTo(ROUTE_REGISTRATION) { inclusive = true }
+                        }
+                    }
+
                     else -> registrationViewModel.onEvent(event)
                 }
             })
