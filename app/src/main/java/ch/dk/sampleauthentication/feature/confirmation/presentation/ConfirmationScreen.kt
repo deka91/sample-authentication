@@ -94,7 +94,7 @@ private fun UserInfoItem(title: String, value: String) {
 
 @Preview
 @Composable
-fun ConfirmationScreenPreview() {
+private fun ConfirmationScreenPreview() {
     SampleAuthenticationTheme {
         ConfirmationScreen(state = ConfirmationState())
     }

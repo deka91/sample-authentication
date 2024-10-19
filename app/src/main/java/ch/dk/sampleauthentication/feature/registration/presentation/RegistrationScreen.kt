@@ -134,7 +134,7 @@ private fun RegistrationContent(state: RegistrationState, onEvent: (Registration
 
 @Preview
 @Composable
-fun RegistrationScreenPreview() {
+private fun RegistrationScreenPreview() {
     SampleAuthenticationTheme {
         RegistrationScreen(state = RegistrationState(), onEvent = {})
     }
