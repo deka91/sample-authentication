@@ -3,6 +3,7 @@ package ch.dk.sampleauthentication.feature.registration.presentation.components
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.*
@@ -11,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.text.input.KeyboardType
 import ch.dk.sampleauthentication.ui.theme.DIMENSIONS
 import ch.dk.sampleauthentication.ui.theme.Gray
 import ch.dk.sampleauthentication.ui.theme.Green
@@ -23,6 +25,7 @@ fun TextInputField(
     modifier: Modifier = Modifier,
     state: TextInputFieldState,
     hint: String,
+    keyboardOptions: KeyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
     onValueChange: (String) -> Unit,
     onFocusChanged: (FocusState) -> Unit
 ) {
@@ -40,8 +43,9 @@ fun TextInputField(
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = MaterialTheme.colorScheme.outline,
                 unfocusedContainerColor = MaterialTheme.colorScheme.outline,
-                disabledContainerColor = MaterialTheme.colorScheme.outline
-            )
+                disabledContainerColor = MaterialTheme.colorScheme.outline,
+            ),
+            keyboardOptions = keyboardOptions
         )
 
         if (state.isHintVisible) {

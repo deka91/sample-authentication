@@ -4,21 +4,27 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import ch.dk.sampleauthentication.R
 import ch.dk.sampleauthentication.core.presentation.components.PrimaryButton
 import ch.dk.sampleauthentication.feature.registration.presentation.components.TextInputField
 import ch.dk.sampleauthentication.ui.theme.DIMENSIONS
+import ch.dk.sampleauthentication.ui.theme.Red
 import ch.dk.sampleauthentication.ui.theme.SampleAuthenticationTheme
+import ch.dk.sampleauthentication.ui.theme.White
 
 /**
  * Created by Deniz Kalem on 18.10.2024
@@ -26,19 +32,40 @@ import ch.dk.sampleauthentication.ui.theme.SampleAuthenticationTheme
 @Composable
 fun RegistrationScreen(state: RegistrationState, onEvent: (RegistrationEvent) -> Unit) {
 
-    Scaffold(content = { padding ->
-        Column(
-            modifier = Modifier
-                .padding(padding)
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.onSurface),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-        ) {
-            RegistrationHeader()
-            RegistrationContent(state = state, onEvent = onEvent)
+    val errorSnackBarHostState = remember { SnackbarHostState() }
+    val keyboard = LocalSoftwareKeyboardController.current
+    val context = LocalContext.current
+
+    LaunchedEffect(key1 = state.errorMessage, key2 = errorSnackBarHostState) {
+        state.errorMessage?.let { message ->
+            keyboard?.hide()
+            errorSnackBarHostState.showSnackbar(message.asString(context))
+            onEvent(RegistrationEvent.OnErrorMessageSeen)
         }
-    })
+    }
+
+    Scaffold(
+        content = { padding ->
+            Column(
+                modifier = Modifier
+                    .padding(padding)
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.onSurface),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+            ) {
+                RegistrationHeader()
+                RegistrationContent(state = state, onEvent = onEvent)
+            }
+        }, snackbarHost = {
+            SnackbarHost(hostState = errorSnackBarHostState) { data ->
+                Snackbar(
+                    containerColor = Red,
+                    contentColor = White,
+                    snackbarData = data
+                )
+            }
+        })
 }
 
 @Composable
@@ -87,6 +114,7 @@ private fun RegistrationContent(state: RegistrationState, onEvent: (Registration
         TextInputField(
             state = state.birthday,
             hint = stringResource(R.string.title_birthday),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             onValueChange = { onEvent(RegistrationEvent.OnBirthdayChange(it)) },
             onFocusChanged = { onEvent(RegistrationEvent.OnBirthdayFocusChange(it)) }
         )
@@ -99,7 +127,7 @@ private fun RegistrationContent(state: RegistrationState, onEvent: (Registration
             onClick = { onEvent(RegistrationEvent.OnSubmit) }
         )
 
-        Spacer(modifier = Modifier.height(DIMENSIONS.baseline2))
+        Spacer(modifier = Modifier.height(DIMENSIONS.baseline4))
     }
 }
 
