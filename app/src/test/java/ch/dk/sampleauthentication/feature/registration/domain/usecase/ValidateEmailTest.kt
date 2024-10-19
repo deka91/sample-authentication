@@ -78,4 +78,18 @@ class ValidateEmailTest {
         assertEquals(expected.isSuccessful, actual.isSuccessful)
         assertEquals((expected.error as UiText.LocalString).id, (actual.error as UiText.LocalString).id)
     }
+
+    @Test
+    fun `Valid email returns success and no error text`() {
+        // GIVEN
+        val name = "a@b.ch"
+
+        // ACTION
+        val actual = validateEmail.invoke(name)
+
+        // ASSERTION
+        val expected = ValidationResult(isSuccessful = false, error = null)
+        assertEquals(expected.isSuccessful, actual.isSuccessful)
+        assertEquals(expected.error, expected.error)
+    }
 }
