@@ -13,6 +13,7 @@ import ch.dk.sampleauthentication.core.presentation.navigation.AppRoutes.GRAPH_A
 import ch.dk.sampleauthentication.core.presentation.navigation.AppRoutes.ROUTE_CONFIRMATION
 import ch.dk.sampleauthentication.core.presentation.navigation.AppRoutes.ROUTE_REGISTRATION
 import ch.dk.sampleauthentication.feature.confirmation.presentation.ConfirmationScreen
+import ch.dk.sampleauthentication.feature.confirmation.presentation.ConfirmationViewModel
 import ch.dk.sampleauthentication.feature.registration.presentation.RegistrationEvent
 import ch.dk.sampleauthentication.feature.registration.presentation.RegistrationScreen
 import ch.dk.sampleauthentication.feature.registration.presentation.RegistrationViewModel
@@ -47,7 +48,9 @@ private fun NavGraphBuilder.authenticationGraph(navController: NavHostController
         }
 
         composable(route = ROUTE_CONFIRMATION) {
-            ConfirmationScreen()
+            val confirmationViewModel = hiltViewModel<ConfirmationViewModel>()
+            val state by confirmationViewModel.state.collectAsStateWithLifecycle()
+            ConfirmationScreen(state = state, onEvent = { confirmationViewModel.onEvent(it) })
         }
     }
 }

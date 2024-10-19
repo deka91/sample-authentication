@@ -27,7 +27,7 @@ import ch.dk.sampleauthentication.ui.theme.SampleAuthenticationTheme
  * Created by Deniz Kalem on 18.10.2024
  */
 @Composable
-fun ConfirmationScreen() {
+fun ConfirmationScreen(state: ConfirmationState, onEvent: (ConfirmationEvent) -> Unit) {
 
     Scaffold(
         content = { padding ->
@@ -40,13 +40,13 @@ fun ConfirmationScreen() {
                 verticalArrangement = Arrangement.Center,
             ) {
                 PrimaryHeader(text = stringResource(id = R.string.confirmation_title))
-                ConfirmationContent()
+                ConfirmationContent(state = state, onEvent = onEvent)
             }
         })
 }
 
 @Composable
-private fun ConfirmationContent() {
+private fun ConfirmationContent(state: ConfirmationState, onEvent: (ConfirmationEvent) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -64,21 +64,21 @@ private fun ConfirmationContent() {
         )
 
         Text(
-            text = stringResource(id = R.string.title_name) + ":",
+            text = stringResource(id = R.string.title_name) + ": " + state.name,
             color = MaterialTheme.colorScheme.onSurface,
             style = MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight.Bold
         )
 
         Text(
-            text = stringResource(id = R.string.title_email) + ":",
+            text = stringResource(id = R.string.title_email) + ": " + state.email,
             color = MaterialTheme.colorScheme.onSurface,
             style = MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight.Bold
         )
 
         Text(
-            text = stringResource(id = R.string.title_birthday) + ":",
+            text = stringResource(id = R.string.title_birthday) + ": " + state.birthday,
             color = MaterialTheme.colorScheme.onSurface,
             style = MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight.Bold
@@ -91,6 +91,6 @@ private fun ConfirmationContent() {
 @Composable
 fun ConfirmationScreenPreview() {
     SampleAuthenticationTheme {
-        ConfirmationScreen()
+        ConfirmationScreen(state = ConfirmationState(), onEvent = {})
     }
 }
