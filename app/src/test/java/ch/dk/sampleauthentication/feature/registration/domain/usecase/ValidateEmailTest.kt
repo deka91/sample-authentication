@@ -64,4 +64,18 @@ class ValidateEmailTest {
         assertEquals(expected.isSuccessful, actual.isSuccessful)
         assertEquals((expected.error as UiText.LocalString).id, (actual.error as UiText.LocalString).id)
     }
+
+    @Test
+    fun `Email without point character is not valid and returns error text for invalid email`() {
+        // GIVEN
+        val name = "abcde@ch"
+
+        // ACTION
+        val actual = validateEmail.invoke(name)
+
+        // ASSERTION
+        val expected = ValidationResult(isSuccessful = false, error = UiText.LocalString(R.string.error_email_not_valid))
+        assertEquals(expected.isSuccessful, actual.isSuccessful)
+        assertEquals((expected.error as UiText.LocalString).id, (actual.error as UiText.LocalString).id)
+    }
 }
