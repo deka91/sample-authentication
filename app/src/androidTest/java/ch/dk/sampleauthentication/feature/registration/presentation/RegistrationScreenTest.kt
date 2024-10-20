@@ -1,8 +1,7 @@
 package ch.dk.sampleauthentication.feature.registration.presentation
 
-import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import org.junit.Rule
 import org.junit.Test
@@ -13,7 +12,7 @@ import org.junit.Test
 class RegistrationScreenTest {
 
     @get:Rule
-    val composeRule = createAndroidComposeRule<ComponentActivity>()
+    val composeRule = createComposeRule()
 
     @Test
     fun registrationScreenRendersCorrectly() {
