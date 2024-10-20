@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -72,7 +73,9 @@ private fun ConfirmationContent(state: ConfirmationState) {
         Spacer(modifier = Modifier.weight(1f))
 
         PrimaryButton(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .testTag(ConfirmationTestTag.BUTTON_FINISH),
             text = stringResource(R.string.confirmation_finish),
             onClick = { activity?.finish() }
         )
@@ -91,11 +94,14 @@ private fun UserInfoItem(title: String, value: String) {
     )
 }
 
-
 @PreviewLightDark
 @Composable
 private fun ConfirmationScreenPreview() {
     SampleAuthenticationTheme {
         ConfirmationScreen(state = ConfirmationState())
     }
+}
+
+object ConfirmationTestTag {
+    const val BUTTON_FINISH = "confirmation_button_finish"
 }
