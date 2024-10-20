@@ -21,37 +21,24 @@ object UseCaseModule {
 
     @Provides
     @Singleton
-    fun provideValidateName(): ValidateName {
-        return ValidateName()
-    }
+    fun provideValidateName(): ValidateName = ValidateName()
 
     @Singleton
     @Provides
-    fun provideEmailValidator(): EmailValidator {
-        return EmailValidatorImpl()
-    }
+    fun provideEmailValidator(): EmailValidator = EmailValidatorImpl()
 
     @Provides
     @Singleton
-    fun provideValidateEmail(emailValidator: EmailValidator): ValidateEmail {
-        return ValidateEmail(emailValidator)
-    }
+    fun provideValidateEmail(emailValidator: EmailValidator): ValidateEmail = ValidateEmail(emailValidator)
 
     @Provides
     @Singleton
-    fun provideValidateBirthday(): ValidateBirthday {
-        return ValidateBirthday()
-    }
+    fun provideValidateBirthday(): ValidateBirthday = ValidateBirthday()
 
     @Provides
     @Singleton
     fun provideRegistrationUseCases(
         validateName: ValidateName, validateEmail: ValidateEmail, validateBirthday: ValidateBirthday
-    ): RegistrationUseCases {
-        return RegistrationUseCases(
-            validateName = validateName,
-            validateEmail = validateEmail,
-            validateBirthday = validateBirthday
-        )
-    }
+    ): RegistrationUseCases =
+        RegistrationUseCases(validateName = validateName, validateEmail = validateEmail, validateBirthday = validateBirthday)
 }
