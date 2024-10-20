@@ -6,8 +6,21 @@ interface elements, validations and data persistence. The app follows clean arch
 repositories to handle business logic and data management.
 
 # Use Cases
+
 - Validate Name
 - Validate Email
 - Validate Birthday
 - Save User Profile
 - Load User Profile
+
+# Architecture Overview
+
+- Build & Dependency Management: Gradle, Kotlin DSL
+- Core Libraries & Architecture Components: ViewModel, Jetpack Compose, Compose Navigation, Hilt Navigation
+- Dependency Injection: Hilt
+- Persistence: EncryptedSharedPreferences
+- UI Components & Design: Jetpack Compose, Material 3 Design System
+- Logging: Timber
+- Unit Testing: jUnit, Mockito
+- UI Testing: Compose Testing, Espresso
+- Debugging Tools: Compose Preview, UI Tooling
