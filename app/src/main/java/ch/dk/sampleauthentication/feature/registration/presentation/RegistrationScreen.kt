@@ -22,6 +22,7 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import ch.dk.sampleauthentication.R
 import ch.dk.sampleauthentication.core.presentation.components.PrimaryButton
 import ch.dk.sampleauthentication.core.presentation.components.PrimaryHeader
+import ch.dk.sampleauthentication.core.presentation.util.UiText
 import ch.dk.sampleauthentication.feature.registration.presentation.InputConstants.DATE_MAX_LENGTH
 import ch.dk.sampleauthentication.feature.registration.presentation.components.TextInputField
 import ch.dk.sampleauthentication.ui.theme.DIMENSIONS
@@ -38,10 +39,22 @@ fun RegistrationScreen(state: RegistrationState, onEvent: (RegistrationEvent) ->
     val context = LocalContext.current
 
     if (state.isInputValid) onEvent(RegistrationEvent.OnSuccess)
-    LaunchedEffect(key1 = state.errorMessage, key2 = errorSnackBarHostState) {
-        state.errorMessage?.let { message ->
+
+    LaunchedEffect(
+        key1 = state.nameError,
+        key2 = state.emailError,
+        key3 = state.birthdayError,
+    ) {
+        val errorMessages = mutableListOf<UiText>()
+
+        state.nameError?.let { errorMessages.add(it) }
+        state.emailError?.let { errorMessages.add(it) }
+        state.birthdayError?.let { errorMessages.add(it) }
+
+        if (errorMessages.isNotEmpty()) {
+            val combinedMessage = errorMessages.joinToString("\n") { it.asString(context) }
             keyboard?.hide()
-            errorSnackBarHostState.showSnackbar(message.asString(context))
+            errorSnackBarHostState.showSnackbar(combinedMessage)
             onEvent(RegistrationEvent.OnErrorMessageSeen)
         }
     }
@@ -119,7 +132,9 @@ private fun RegistrationContent(state: RegistrationState, onEvent: (Registration
         Spacer(modifier = Modifier.weight(1f))
 
         PrimaryButton(
-            modifier = Modifier.fillMaxWidth().testTag(RegistrationTestTag.BUTTON_SUBMIT),
+            modifier = Modifier
+                .fillMaxWidth()
+                .testTag(RegistrationTestTag.BUTTON_SUBMIT),
             text = stringResource(R.string.registration_submit),
             onClick = {
                 onEvent(

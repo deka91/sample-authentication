@@ -14,5 +14,7 @@ data class RegistrationState(
     val email: TextInputFieldState = TextInputFieldState(),
     val birthday: TextInputFieldState = TextInputFieldState(),
     val isInputValid: Boolean = false,
-    val errorMessage: UiText? = null
+    val nameError: UiText? = null,
+    val emailError: UiText? = null,
+    val birthdayError: UiText? = null
 ) : Parcelable

@@ -64,56 +64,45 @@ class RegistrationViewModel @Inject constructor(
     private fun changeBirthday(birthday: String) {
         val result = registrationUseCases.validateBirthday(birthday)
         updateState {
-            it.copy(
-                birthday = it.birthday.copy(
-                    text = birthday, isCheckVisible = result.isSuccessful
-                )
-            )
+            it.copy(birthday = it.birthday.copy(text = birthday, isCheckVisible = result.isSuccessful))
         }
     }
 
     private fun changeBirthdayFocus(focusState: FocusState) {
         updateState {
-            it.copy(
-                birthday = it.birthday.copy(
-                    isHintVisible = it.birthday.text.isBlank() && !focusState.isFocused
-                )
-            )
+            it.copy(birthday = it.birthday.copy(isHintVisible = it.birthday.text.isBlank() && !focusState.isFocused))
         }
     }
 
     private fun errorMessageSeen() {
-        updateState { it.copy(errorMessage = null) }
+        updateState {
+            it.copy(nameError = null, emailError = null, birthdayError = null)
+        }
     }
 
     private fun register(name: String, email: String, birthday: String) {
-        val nameResult = registrationUseCases.validateName(name)
-        val emailResult = registrationUseCases.validateEmail(email)
-        val birthdayResult = registrationUseCases.validateBirthday(birthday)
+        val nameValidation = registrationUseCases.validateName(name)
+        val emailValidation = registrationUseCases.validateEmail(email)
+        val birthdayValidation = registrationUseCases.validateBirthday(birthday)
 
-        val isNameError = !nameResult.isSuccessful
-        val isEmailError = !emailResult.isSuccessful
-        val isBirthdayError = !birthdayResult.isSuccessful
-
-        val errorMessage = when {
-            isNameError -> nameResult.error
-            isEmailError -> emailResult.error
-            isBirthdayError -> birthdayResult.error
-            else -> null
-        }
+        val isNameError = !nameValidation.isSuccessful
+        val isEmailError = !emailValidation.isSuccessful
+        val isBirthdayError = !birthdayValidation.isSuccessful
 
         updateState {
             it.copy(
-                name = it.name.copy(isError = isNameError),
-                email = it.email.copy(isError = isEmailError),
-                birthday = it.birthday.copy(isError = isBirthdayError),
-                errorMessage = errorMessage
+                name = it.name.copy(text = name, isError = isNameError),
+                email = it.email.copy(text = email, isError = isEmailError),
+                birthday = it.birthday.copy(text = birthday, isError = isBirthdayError),
+                nameError = if (isNameError) nameValidation.error else null,
+                emailError = if (isEmailError) emailValidation.error else null,
+                birthdayError = if (isBirthdayError) birthdayValidation.error else null,
+                isInputValid = !isNameError && !isEmailError && !isBirthdayError
             )
         }
 
-        if (!isNameError && !isEmailError && !isBirthdayError) {
+        if (nameValidation.isSuccessful && emailValidation.isSuccessful && birthdayValidation.isSuccessful) {
             registrationUseCases.saveUserProfile(UserProfile(name, email, birthday))
-            updateState { it.copy(isInputValid = true) }
         }
     }
 
