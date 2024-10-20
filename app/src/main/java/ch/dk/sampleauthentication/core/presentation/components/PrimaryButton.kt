@@ -12,15 +12,12 @@ import ch.dk.sampleauthentication.ui.theme.DIMENSIONS
 fun PrimaryButton(
     modifier: Modifier = Modifier,
     text: String,
-    isEnabled: Boolean = true,
     onClick: () -> Unit
 ) {
     Button(
-        modifier = modifier
-            .height(DIMENSIONS.baseline8),
+        modifier = modifier.height(DIMENSIONS.baseline8),
         onClick = onClick,
-        shape = MaterialTheme.shapes.large,
-        enabled = isEnabled
+        shape = MaterialTheme.shapes.large
     ) {
         Text(text = text.uppercase())
     }
