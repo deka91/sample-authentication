@@ -2,7 +2,7 @@ package ch.dk.sampleauthentication.feature.confirmation.presentation
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import ch.dk.sampleauthentication.feature.confirmation.domain.repository.ConfirmationRepository
+import ch.dk.sampleauthentication.feature.confirmation.domain.usecase.ConfirmationUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -12,7 +12,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ConfirmationViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
-    private val confirmationRepository: ConfirmationRepository
+    private val confirmationUseCases: ConfirmationUseCases
 ) : ViewModel() {
 
     val state = savedStateHandle.getStateFlow(
@@ -20,16 +20,18 @@ class ConfirmationViewModel @Inject constructor(
     )
 
     init {
-        loadUserData()
+        loadUserProfile()
     }
 
-    private fun loadUserData() {
+    private fun loadUserProfile() {
         updateState {
-            it.copy(
-                name = confirmationRepository.loadName(),
-                email = confirmationRepository.loadEmail(),
-                birthday = confirmationRepository.loadBirthday()
-            )
+            confirmationUseCases.loadUserProfile().let { userProfile ->
+                it.copy(
+                    name = userProfile.name,
+                    email = userProfile.email,
+                    birthday = userProfile.birthday
+                )
+            }
         }
     }
 
