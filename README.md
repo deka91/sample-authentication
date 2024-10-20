@@ -28,5 +28,15 @@ repositories to handle business logic and data management.
 # Screens
 
 ## Registration Screen - Initial
-![Light](app/docs/screenshots/registration_initial_light.png)
-![Dark](app/docs/screenshots/registration_initial_dark.png)
+
+<div style="display: flex; justify-content: space-between;">
+    <img src="app/docs/screenshots/registration_initial_light.png" alt="Light Mode" width="45%" />
+    <img src="app/docs/screenshots/registration_initial_dark.png" alt="Dark Mode" width="45%" />
+</div>
+
+## Registration Screen - Valid Input
+
+<div style="display: flex; justify-content: space-between;">
+    <img src="app/docs/screenshots/registration_valid_input_light.png" alt="Light Mode" width="45%" />
+    <img src="app/docs/screenshots/registration_valid_input_dark.png" alt="Dark Mode" width="45%" />
+</div>
