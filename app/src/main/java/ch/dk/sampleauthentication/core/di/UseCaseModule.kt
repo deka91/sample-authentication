@@ -1,10 +1,8 @@
 package ch.dk.sampleauthentication.core.di
 
 import ch.dk.sampleauthentication.feature.registration.data.validation.EmailValidatorImpl
-import ch.dk.sampleauthentication.feature.registration.domain.usecase.RegistrationUseCases
-import ch.dk.sampleauthentication.feature.registration.domain.usecase.ValidateBirthday
-import ch.dk.sampleauthentication.feature.registration.domain.usecase.ValidateEmail
-import ch.dk.sampleauthentication.feature.registration.domain.usecase.ValidateName
+import ch.dk.sampleauthentication.feature.registration.domain.repository.RegistrationRepository
+import ch.dk.sampleauthentication.feature.registration.domain.usecase.*
 import ch.dk.sampleauthentication.feature.registration.domain.validation.EmailValidator
 import dagger.Module
 import dagger.Provides
@@ -37,8 +35,18 @@ object UseCaseModule {
 
     @Provides
     @Singleton
+    fun provideSaveUserData(registrationRepository: RegistrationRepository): SaveUserData =
+        SaveUserData(registrationRepository = registrationRepository)
+
+    @Provides
+    @Singleton
     fun provideRegistrationUseCases(
-        validateName: ValidateName, validateEmail: ValidateEmail, validateBirthday: ValidateBirthday
+        validateName: ValidateName, validateEmail: ValidateEmail, validateBirthday: ValidateBirthday, saveUserData: SaveUserData
     ): RegistrationUseCases =
-        RegistrationUseCases(validateName = validateName, validateEmail = validateEmail, validateBirthday = validateBirthday)
+        RegistrationUseCases(
+            validateName = validateName,
+            validateEmail = validateEmail,
+            validateBirthday = validateBirthday,
+            saveUserData = saveUserData
+        )
 }
