@@ -3,6 +3,7 @@ package ch.dk.sampleauthentication.feature.registration.presentation
 import androidx.compose.ui.focus.FocusState
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import ch.dk.sampleauthentication.core.domain.model.UserProfile
 import ch.dk.sampleauthentication.feature.registration.domain.usecase.RegistrationUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -104,7 +105,7 @@ class RegistrationViewModel @Inject constructor(
             return
         }
 
-        registrationUseCases.saveUserData(name = name, email = email, birthday = birthday)
+        registrationUseCases.saveUserProfile(userProfile = UserProfile(name = name, email = email, birthday = birthday))
         updateState { it.copy(isInputValid = true) }
     }
 

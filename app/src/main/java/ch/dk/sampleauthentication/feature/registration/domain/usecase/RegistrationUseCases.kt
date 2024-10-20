@@ -5,5 +5,5 @@ data class RegistrationUseCases(
     val validateName: ValidateName,
     val validateEmail: ValidateEmail,
     val validateBirthday: ValidateBirthday,
-    val saveUserData: SaveUserData
+    val saveUserProfile: SaveUserProfile
 )

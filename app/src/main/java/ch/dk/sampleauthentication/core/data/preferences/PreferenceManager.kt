@@ -1,6 +1,7 @@
 package ch.dk.sampleauthentication.core.data.preferences
 
 import android.content.SharedPreferences
+import ch.dk.sampleauthentication.core.domain.model.UserProfile
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -11,14 +12,14 @@ import javax.inject.Inject
 class PreferenceManager @Inject constructor(
     private val sharedPreferences: SharedPreferences
 ) {
-    fun writeUserData(name: String, email: String, birthday: String) {
+    fun writeUserProfile(userProfile: UserProfile) {
         sharedPreferences.edit().apply {
-            putString(KEY_NAME, name)
-            putString(KEY_EMAIL, email)
-            putString(KEY_BIRTHDAY, birthday)
+            putString(KEY_NAME, userProfile.name)
+            putString(KEY_EMAIL, userProfile.email)
+            putString(KEY_BIRTHDAY, userProfile.birthday)
             apply()
         }
-        Timber.i("User data saved successfully: Name: $name, Email: $email, Birthday: $birthday")
+        Timber.i("User profile saved successfully: Name: ${userProfile.name}, Email: ${userProfile.email}, Birthday: ${userProfile.birthday}")
     }
 
     fun readName(): String? = sharedPreferences.getString(KEY_NAME, null)
