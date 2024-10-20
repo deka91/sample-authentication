@@ -3,7 +3,6 @@ package ch.dk.sampleauthentication.feature.registration.presentation
 import androidx.compose.ui.focus.FocusState
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import ch.dk.sampleauthentication.feature.registration.domain.repository.RegistrationRepository
 import ch.dk.sampleauthentication.feature.registration.domain.usecase.RegistrationUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -14,8 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class RegistrationViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
-    private val registrationUseCases: RegistrationUseCases,
-    private val registrationRepository: RegistrationRepository
+    private val registrationUseCases: RegistrationUseCases
 ) : ViewModel() {
 
     val state = savedStateHandle.getStateFlow(
@@ -106,7 +104,7 @@ class RegistrationViewModel @Inject constructor(
             return
         }
 
-        registrationRepository.saveUserData(name = name, email = email, birthday = birthday)
+        registrationUseCases.saveUserData(name = name, email = email, birthday = birthday)
         updateState { it.copy(isInputValid = true) }
     }
 
