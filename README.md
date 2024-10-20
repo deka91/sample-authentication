@@ -24,3 +24,9 @@ repositories to handle business logic and data management.
 - Unit Testing: jUnit, Mockito
 - UI Testing: Compose Testing, Espresso
 - Debugging Tools: Compose Preview, UI Tooling
+
+# Screens
+
+## Registration Screen - Initial
+![Light](app/docs/screenshots/registration_initial_light.png)
+![Dark](app/docs/screenshots/registration_initial_dark.png)
