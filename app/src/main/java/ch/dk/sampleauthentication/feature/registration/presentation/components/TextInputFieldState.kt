@@ -10,5 +10,6 @@ import kotlinx.parcelize.Parcelize
 data class TextInputFieldState(
     val text: String = "",
     val isHintVisible: Boolean = true,
-    val isCheckVisible: Boolean = false
+    val isCheckVisible: Boolean = false,
+    val isError: Boolean = false
 ) : Parcelable
