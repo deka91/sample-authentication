@@ -122,7 +122,7 @@ private fun RegistrationContent(state: RegistrationState, onEvent: (Registration
         TextInputField(
             modifier = Modifier.testTag(RegistrationTestTag.INPUT_BIRTHDAY),
             state = state.birthday,
-            hint = stringResource(R.string.title_birthday),
+            hint = "${stringResource(R.string.title_birthday)} ${stringResource(R.string.registration_description_birthday)}",
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             maxLength = DATE_MAX_LENGTH,
             onValueChange = { onEvent(RegistrationEvent.OnBirthdayChange(it)) },

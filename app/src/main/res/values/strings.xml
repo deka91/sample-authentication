@@ -9,6 +9,7 @@
     <string name="registration_title">Herzlich willkommen</string>
     <string name="registration_description">Bitte fülle die nachfolgenden Felder aus, um dich zu registrieren:</string>
     <string name="registration_submit">Registrieren</string>
+    <string name="registration_description_birthday">(DD.MM.YYYY)</string>
 
     <!-- Confirmation -->
     <string name="confirmation_title">Danke für die Registrierung</string>
@@ -19,7 +20,7 @@
     <string name="error_name_blank">Der Name darf nicht leer sein</string>
     <string name="error_name_not_valid">Der Name ist nicht gültig</string>
     <string name="error_email_blank">Die E-Mail darf nicht leer sein</string>
-    <string name="error_email_not_valid">Die E-Mail-Adresse ist nicht gültig</string>
+    <string name="error_email_not_valid">Die E-Mail ist nicht gültig</string>
     <string name="error_birthday_blank">Das Geburtsdatum darf nicht leer sein</string>
     <string name="error_birthday_not_valid">Das Geburtsdatum ist nicht gültig</string>
 
