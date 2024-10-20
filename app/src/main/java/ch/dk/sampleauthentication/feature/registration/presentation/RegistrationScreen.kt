@@ -147,3 +147,10 @@ private fun RegistrationScreenPreview() {
 object InputConstants {
     const val DATE_MAX_LENGTH = 10
 }
+
+object RegistrationTestTag {
+    const val INPUT_NAME = "registration_input_name"
+    const val INPUT_EMAIL = "registration_input_email"
+    const val INPUT_BIRTHDAY = "registration_input_birthday"
+    const val BUTTON_SUBMIT = "registration_button_submit"
+}
