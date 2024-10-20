@@ -45,7 +45,8 @@ fun TextInputField(
             singleLine = true,
             maxLines = 1,
             shape = MaterialTheme.shapes.small,
-            keyboardOptions = keyboardOptions
+            keyboardOptions = keyboardOptions,
+            isError = state.isError
         )
 
         if (state.isHintVisible) {

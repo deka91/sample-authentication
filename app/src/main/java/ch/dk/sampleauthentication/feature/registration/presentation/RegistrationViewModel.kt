@@ -88,25 +88,33 @@ class RegistrationViewModel @Inject constructor(
 
     private fun register(name: String, email: String, birthday: String) {
         val nameResult = registrationUseCases.validateName(name)
-        if (!nameResult.isSuccessful) {
-            updateState { it.copy(errorMessage = nameResult.error) }
-            return
-        }
-
         val emailResult = registrationUseCases.validateEmail(email)
-        if (!emailResult.isSuccessful) {
-            updateState { it.copy(errorMessage = emailResult.error) }
-            return
-        }
-
         val birthdayResult = registrationUseCases.validateBirthday(birthday)
-        if (!birthdayResult.isSuccessful) {
-            updateState { it.copy(errorMessage = birthdayResult.error) }
-            return
+
+        val isNameError = !nameResult.isSuccessful
+        val isEmailError = !emailResult.isSuccessful
+        val isBirthdayError = !birthdayResult.isSuccessful
+
+        val errorMessage = when {
+            isNameError -> nameResult.error
+            isEmailError -> emailResult.error
+            isBirthdayError -> birthdayResult.error
+            else -> null
         }
 
-        registrationUseCases.saveUserProfile(userProfile = UserProfile(name = name, email = email, birthday = birthday))
-        updateState { it.copy(isInputValid = true) }
+        updateState {
+            it.copy(
+                name = it.name.copy(isError = isNameError),
+                email = it.email.copy(isError = isEmailError),
+                birthday = it.birthday.copy(isError = isBirthdayError),
+                errorMessage = errorMessage
+            )
+        }
+
+        if (!isNameError && !isEmailError && !isBirthdayError) {
+            registrationUseCases.saveUserProfile(UserProfile(name, email, birthday))
+            updateState { it.copy(isInputValid = true) }
+        }
     }
 
     private fun updateState(update: (RegistrationState) -> RegistrationState) {
