@@ -22,7 +22,7 @@ repositories to handle business logic and data management.
 - UI Components & Design: Jetpack Compose, Material 3 Design System
 - Logging: Timber
 - Unit Testing: jUnit, Mockito
-- UI Testing: Compose Testing, Espresso
+- UI Testing: Compose Testing
 - Debugging Tools: Compose Preview, UI Tooling
 
 # Screens
